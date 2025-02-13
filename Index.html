@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Be My Valentine?</title>
+<style>
+body {
+text-align: center;
+font-family: 'Arial', sans-serif;
+background-color: #ffdde1;
+color: #d63384;
+padding: 50px;
+}
+h1 {
+font-size: 36px;
+}
+.heart {
+font-size: 50px;
+animation: heartbeat 1s infinite;
+}
+@keyframes heartbeat {
+0% { transform: scale(1); }
+50% { transform: scale(1.2); }
+100% { transform: scale(1); }
+}
+.btn {
+display: inline-block;
+margin: 20px;
+padding: 15px 30px;
+font-size: 18px;
+color: white;
+background-color: #d63384;
+border: none;
+border-radius: 10px;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+.btn:hover {
+background-color: #a61e6a;
+}
+#yesBtn {
+font-size: 18px;
+}
+#noBtn {
+background-color: #888;
+}
+#noBtn:hover {
+background-color: #666;
+}
+#response {
+font-size: 24px;
+margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<h1>Will You Be My Valentine? 💖</h1>
+<p class="heart">❤️ 💕 💞</p>
+
+<button class="btn" id="yesBtn" onclick="yesResponse()">Yes 💘</button>
+<button class="btn" id="noBtn" onclick="noResponse()">No 💔</button>
+
+<p id="response"></p>
+
+<script>
+let yesSize = 18; // Initial font size in px
+let clickCount = 0; // No button click count
+
+function yesResponse() {
+document.getElementById("response").innerHTML = "Yay! You made my day! 😍💖";
+}
+
+function noResponse() {
+clickCount++;
+yesSize *= 1.5; // Increase Yes button size
+document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+
+// Hide No button after 5 clicks
+if (clickCount >= 5) {
+document.getElementById("noBtn").style.display = "none";
+document.getElementById("yesBtn").style.width = "100vw";
+document.getElementById("yesBtn").style.height = "100vh";
+document.getElementById("yesBtn").innerHTML = "YOU HAVE TO SAY YES! 💘";
+}
+}
+</script>
+
+</body>
+</html>
