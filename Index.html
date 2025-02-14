@@ -173,17 +173,29 @@
             }
         }
 
-     function startMusic() {
+        function startMusic() {
             let music = document.getElementById("backgroundMusic");
-            if (!musicPlaying) {
-                music.play();
-                musicPlaying = true;
-                document.body.removeEventListener("click", startMusic); // Remove after first click
-            }
+            
+            // Play the audio but start muted (bypass autoplay restrictions)
+            music.muted = true;
+            music.play().then(() => {
+                // After it starts, unmute it
+                music.muted = false;
+            }).catch(error => {
+                console.log("Autoplay blocked, waiting for user interaction.");
+            });
         }
 
-        // Ensure music starts when user interacts if autoplay is blocked
-        document.body.addEventListener("click", startMusic);
+        // Try autoplay immediately
+        startMusic();
+
+        // If autoplay is blocked, wait for user interaction
+        document.body.addEventListener("click", () => {
+            let music = document.getElementById("backgroundMusic");
+            if (music.paused) {
+                music.play();
+            }
+        });
     </script>
 
 </body>
