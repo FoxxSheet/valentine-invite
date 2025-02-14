@@ -67,11 +67,6 @@
         #noBtn:hover {
             background-color: #666;
         }
-        #response {
-            font-size: 18px;
-            margin-top: 10px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-        }
         /* GIF Placement */
         .gif {
             position: absolute;
@@ -90,6 +85,30 @@
             left: 50%;
             transform: translateX(-50%);
         }
+        /* Popup Modal */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 10;
+        }
+        .popup button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border: none;
+            background-color: #d63384;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -104,12 +123,10 @@
 
     <!-- Page Content -->
     <div class="content">
-        <h1>Will You Be My Valentine? 💖</h1>
+        <h1>Will You Be My Valentine?</h1>
 
         <button class="btn" id="yesBtn" onclick="yesResponse()">Yes 💘</button>
         <button class="btn" id="noBtn" onclick="noResponse()">No 💔</button>
-
-        <p id="response"></p>
 
         <!-- GIFs Positioned -->
         <img src="Love_Mochi_Sticker.gif" class="gif gif-top-left" alt="Mochi Cat Love">
@@ -117,17 +134,27 @@
         <img src="Mochicat_Love_Sticker.gif" class="gif gif-bottom" alt="Mochi Cat Dance">
     </div>
 
+    <!-- Popup Dialog -->
+    <div class="popup" id="popup">
+        <p>Yay! You made my day! 😍💖 <br> See you this Saturday!</p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+
     <script>
         let yesSize = 16;
         let clickCount = 0;
 
         function yesResponse() {
-            document.getElementById("response").innerHTML = "Yay! You made my day! 😍💖";
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
         }
 
         function noResponse() {
             clickCount++;
-            yesSize *= 1.5;
+            yesSize *= 2;
             document.getElementById("yesBtn").style.fontSize = yesSize + "px";
 
             if (clickCount >= 5) {
