@@ -75,10 +75,12 @@
         .gif-top-left {
             top: -20px; /* Lowered slightly */
             left: -10px; /* Shifted right */
+            transform: translateX(-50%);
         }
         .gif-top-right {
             top: -20px; /* Lowered slightly */
             right: -10px; /* Shifted left */
+            transform: translateX(-50%);
         }
         .gif-bottom {
             bottom: -30px;
@@ -154,7 +156,7 @@
 
         function noResponse() {
             clickCount++;
-            yesSize *= 2;
+            yesSize *= 1.5;
             document.getElementById("yesBtn").style.fontSize = yesSize + "px";
 
             if (clickCount >= 5) {
