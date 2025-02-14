@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Will You Be My Valentine?</title>
     <style>
-        /* Fullscreen Video Background - Ensures full video is always visible */
+        /* Fullscreen Video Background - Scaled & Centered */
         body, html {
             height: 100%;
             margin: 0;
@@ -13,13 +13,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background: black; /* Fills any extra space */
         }
         .video-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            min-width: 100%;
-            min-height: 100%;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            transform: translate(-50%, -50%);
+            object-fit: contain; /* Ensures the whole video is visible */
             z-index: -1;
         }
         .content {
@@ -72,7 +75,7 @@
 </head>
 <body>
 
-    <!-- Video Background (Full View) -->
+    <!-- Video Background (Centered & No Cropping) -->
     <video autoplay loop muted class="video-bg">
         <source src="copy_382DAD50-A953-412A-9831-02EB5A3A5301.mp4" type="video/mp4">
         Your browser does not support the video tag.
