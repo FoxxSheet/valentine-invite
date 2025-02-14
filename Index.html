@@ -111,18 +111,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        /* Music Control */
-        .music-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            color: white;
-            font-size: 18px;
-        }
     </style>
 </head>
 <body onclick="startMusic()"> <!-- Music starts when user clicks anywhere -->
@@ -155,13 +143,10 @@
     </div>
 
     <!-- Background Music -->
-    <audio id="backgroundMusic" loop>
+    <audio id="backgroundMusic" autoplay loop>
         <source src="Alex Warren - Carry You Home (Official Video).mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
-
-    <!-- Music Control Button -->
-    <div class="music-control" onclick="toggleMusic()">🔊</div>
 
     <script>
         let yesSize = 16;
@@ -198,19 +183,7 @@
             }
         }
 
-        function toggleMusic() {
-            let music = document.getElementById("backgroundMusic");
-            if (musicPlaying) {
-                music.pause();
-                document.querySelector(".music-control").innerHTML = "🔇";
-            } else {
-                music.play();
-                document.querySelector(".music-control").innerHTML = "🔊";
-            }
-            musicPlaying = !musicPlaying;
-        }
-
-        // Ensure music starts when user interacts
+        // Ensure music starts when user interacts if autoplay is blocked
         document.body.addEventListener("click", startMusic);
     </script>
 
