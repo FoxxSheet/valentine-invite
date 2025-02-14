@@ -21,7 +21,7 @@
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            z-index: -1;
+            z-index: -2;
         }
         .video-container video {
             width: 100%;
@@ -35,8 +35,9 @@
             font-family: 'Arial', sans-serif;
             color: white;
             padding: 30px;
-            background: rgba(0, 0, 0, 0.4); /* Dark overlay for readability */
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 15px;
+            z-index: 1;
         }
         h1 {
             font-size: 24px;
@@ -71,14 +72,15 @@
         .gif {
             position: absolute;
             width: 90px;
+            z-index: -1; /* Send behind text */
         }
-        /* Updated: Move top GIFs inside content box */
+        /* Move the top GIFs up and behind the text */
         .gif-top-left {
-            top: 0;
+            top: -20px;
             left: -30px;
         }
         .gif-top-right {
-            top: 0;
+            top: -20px;
             right: -30px;
         }
         .gif-bottom {
@@ -164,8 +166,3 @@
                 document.getElementById("yesBtn").style.height = "100vh";
                 document.getElementById("yesBtn").innerHTML = "YOU HAVE TO SAY YES! 💘";
             }
-        }
-    </script>
-
-</body>
-</html>
