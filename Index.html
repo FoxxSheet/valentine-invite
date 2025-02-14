@@ -72,18 +72,18 @@
         .gif {
             position: absolute;
             width: 90px;
-            z-index: -1; /* Send behind text */
+            z-index: -1;
         }
         .gif-top-left {
-            top: -35px;
-            left: -3px;
+            top: -50px;
+            left: 10px;
         }
         .gif-top-right {
-            top: -35px;
-            right: -3px;
+            top: -50px;
+            right: 10px;
         }
         .gif-bottom {
-            bottom: -30px;
+            bottom: -40px;
             left: 50%;
             transform: translateX(-50%);
         }
@@ -111,7 +111,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        /* Music Controls */
+        /* Music Control */
         .music-control {
             position: fixed;
             bottom: 20px;
@@ -125,7 +125,7 @@
         }
     </style>
 </head>
-<body>
+<body onclick="startMusic()"> <!-- Music starts when user clicks anywhere -->
 
     <!-- Video Background Container -->
     <div class="video-container">
@@ -137,7 +137,7 @@
 
     <!-- Page Content -->
     <div class="content">
-        <h1>Will You Be My Valentine?</h1>
+        <h1>Will You Be My Valentine? 💖</h1>
 
         <button class="btn" id="yesBtn" onclick="yesResponse()">Yes 💘</button>
         <button class="btn" id="noBtn" onclick="noResponse()">No 💔</button>
@@ -145,4 +145,74 @@
         <!-- GIFs Positioned -->
         <img src="Love_Mochi_Sticker.gif" class="gif gif-top-left" alt="Mochi Cat Love">
         <img src="love-mochi.gif" class="gif gif-top-right" alt="Mochi Cat Hug">
-        <img src="Mochicat_Love_Sticker.gif" class="gif gif-bottom" alt
+        <img src="Mochicat_Love_Sticker.gif" class="gif gif-bottom" alt="Mochi Cat Dance">
+    </div>
+
+    <!-- Popup Dialog -->
+    <div class="popup" id="popup">
+        <p>Yay! You made my day! 😍💖 <br> See you this Saturday my Lab! Iloveyousomuch 💖</p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop>
+        <source src="Alex Warren - Carry You Home (Official Video).mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music Control Button -->
+    <div class="music-control" onclick="toggleMusic()">🔊</div>
+
+    <script>
+        let yesSize = 16;
+        let clickCount = 0;
+        let musicPlaying = false;
+
+        function yesResponse() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function noResponse() {
+            clickCount++;
+            yesSize *= 1.5;
+            document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+
+            if (clickCount >= 5) {
+                document.getElementById("noBtn").style.display = "none";
+                document.getElementById("yesBtn").style.width = "100vw";
+                document.getElementById("yesBtn").style.height = "100vh";
+                document.getElementById("yesBtn").innerHTML = "YOU HAVE TO SAY YES! 💘";
+            }
+        }
+
+        function startMusic() {
+            let music = document.getElementById("backgroundMusic");
+            if (!musicPlaying) {
+                music.play();
+                musicPlaying = true;
+                document.body.removeEventListener("click", startMusic); // Remove after first click
+            }
+        }
+
+        function toggleMusic() {
+            let music = document.getElementById("backgroundMusic");
+            if (musicPlaying) {
+                music.pause();
+                document.querySelector(".music-control").innerHTML = "🔇";
+            } else {
+                music.play();
+                document.querySelector(".music-control").innerHTML = "🔊";
+            }
+            musicPlaying = !musicPlaying;
+        }
+
+        // Ensure music starts when user interacts
+        document.body.addEventListener("click", startMusic);
+    </script>
+
+</body>
+</html>
